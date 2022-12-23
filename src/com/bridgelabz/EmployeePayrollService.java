@@ -25,12 +25,28 @@ public class EmployeePayrollService {
     public int updateSalary(String empName, double salary) throws SQLException {
         Connection connection = JDBCConnection.connectToDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement("update employee_payroll set salary = ? where name = ?");
-        preparedStatement.setDouble(1,salary);
-        preparedStatement.setString(2,empName);
+        preparedStatement.setDouble(1, salary);
+        preparedStatement.setString(2, empName);
         int rowsAffected = preparedStatement.executeUpdate();
         if (rowsAffected > 0) {
             System.out.println("salary updated successfully!");
         }
         return rowsAffected;
+    }
+
+    public void getEmployeeBetweenSalaryRange(double minSalary, double maxSalary) throws SQLException {
+        List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
+        Connection connection = JDBCConnection.connectToDatabase();
+
+        assert connection != null;
+        PreparedStatement preparedStatement = connection.prepareStatement(("select * from employee_payroll where salary between ? and ?"));
+        preparedStatement.setDouble(1, minSalary);
+        preparedStatement.setDouble(2, maxSalary);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            employeePayrollDataList.add(new EmployeePayrollData(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getDate(5)));
+        }
+        employeePayrollDataList.forEach(data -> System.out.println(data));
+        connection.close();
     }
 }
