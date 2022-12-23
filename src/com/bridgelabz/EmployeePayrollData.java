@@ -17,6 +17,9 @@ public class EmployeePayrollData {
         this.start_date = start_date;
     }
 
+    public EmployeePayrollData(int anInt, String string, String string1, double aDouble, java.sql.Date date) {
+    }
+
     @Override
     public String toString() {
         return "EmployeePayrollData{" +
