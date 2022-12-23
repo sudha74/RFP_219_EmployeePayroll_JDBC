@@ -10,9 +10,12 @@ public class EmployeePayrollMain {
         employeePayrollService.retrieveData().forEach((employeePayrollData -> System.out.println(employeePayrollData)));
 
         System.out.println("\nupdate salary: ");
-        employeePayrollService.updateSalary("Mark", 300000.00);
+        employeePayrollService.updateSalary("Mark",300000.00);
 
         System.out.println("\nsalary between range: ");
-        employeePayrollService.getEmployeeBetweenSalaryRange(200000.00, 400000.00);
+        employeePayrollService.getEmployeeBetweenSalaryRange(200000.00,400000.00);
+
+        System.out.println("\nSUM(salary) of male and female: ");
+        employeePayrollService.getSumOfSalaryByMaleAndFemale();
     }
 }

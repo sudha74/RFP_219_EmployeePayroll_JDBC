@@ -49,4 +49,18 @@ public class EmployeePayrollService {
         employeePayrollDataList.forEach(data -> System.out.println(data));
         connection.close();
     }
+
+    public void getSumOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JDBCConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT gender,count(*),SUM(salary) FROM employee_payroll GROUP BY gender;");
+        System.out.println("gender count SUM(salary)");
+        while (resultSet.next()) {
+            System.out.println(
+                    resultSet.getString(1) + "\t"
+                            + resultSet.getInt(2) + "\t"
+                            + resultSet.getDouble(3)
+            );
+        }
+    }
 }
