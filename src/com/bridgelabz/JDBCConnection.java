@@ -1,12 +1,10 @@
 package com.bridgelabz;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.Enumeration;
 
-public class JDBCExample {
-    public static void main(String[] args) {
+public class JDBCConnection {
+    public static Connection connectToDatabase() {
         String URL = "jdbc:mysql://localhost:3306/payroll_service";
         String USER = "root";
         String PASS = "Sudha@123";
@@ -23,9 +21,11 @@ public class JDBCExample {
             System.out.println("connecting to database: " + URL);
             connection = DriverManager.getConnection(URL, USER, PASS);
             System.out.println("connection is successful! " + connection);
-            connection.close();
+
+            return connection;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
